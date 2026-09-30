@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Menushell401.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Menushell401"
+    xmlns:vistas="clr-namespace:Menushell401.Vistas"
+    Title="Menushell401"
+    Shell.BackgroundColor="#D32F2F"
+    Shell.ForegroundColor="White"
+    Shell.TitleColor="White"
+    FlyoutBackgroundColor="#E53935"
+    Shell.UnselectedColor="White"
+    Shell.TabBarForegroundColor="White">
+
+    <FlyoutItem Title="Home" Icon="casa.png">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Noticias" Icon="periodico.png">
+        <ShellContent ContentTemplate="{DataTemplate vistas:Noticias}" Route="Noticias" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Control escolar" Icon="panel_de_administrador.png">
+        <ShellContent ContentTemplate="{DataTemplate vistas:Controlescolar}" Route="Controlescolar" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Historial" Icon="batman.png">
+        <ShellContent ContentTemplate="{DataTemplate vistas:Historial}" Route="Historial" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Eventos" Icon="eventos.png">
+        <ShellContent ContentTemplate="{DataTemplate vistas:Eventos}" Route="Eventos" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Comunicados" Icon="comunicados.png">
+        <ShellContent ContentTemplate="{DataTemplate vistas:Comunicados}" Route="Comunicados" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Carga Actual" Icon="cargaescolar.png">
+        <ShellContent ContentTemplate="{DataTemplate vistas:CargaActual}" Route="CargaActual" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Calendario" Icon="calendario2.png">
+        <ShellContent ContentTemplate="{DataTemplate vistas:Calendario}" Route="Calendario" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Acerca de" Icon="acercade.png">
+        <ShellContent ContentTemplate="{DataTemplate vistas:Acercade}" Route="Acercade" />
+    </FlyoutItem>
+
+</Shell>

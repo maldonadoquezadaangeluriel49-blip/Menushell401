@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Menushell401.MainPage"
+             BackgroundColor="White">
+
+    <ScrollView BackgroundColor="White">
+        <VerticalStackLayout Spacing="20">
+
+            <!-- Banner / Encabezado de la UPVM -->
+            <Grid HeightRequest="220">
+                <Image
+                    Source="banner_upvm.jpg"
+                    Aspect="AspectFill"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill" />
+
+                <Image
+                    Source="logoapp.jpg"
+                    HeightRequest="150"
+                    WidthRequest="150"
+                    Aspect="AspectFit"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <!-- Textos Principales -->
+            <VerticalStackLayout Spacing="10" Padding="20,0">
+                <Label
+                    Text="Diario UPVM"
+                    TextColor="#1A1A1A"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center" />
+
+                <Label
+                    Text="Bienvenido a nuestro lugar de noticias y chismotesss"
+                    TextColor="#4A4A4A"
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+
+            <!-- Formulario de Inicio de Sesión -->
+            <Border Margin="20,10"
+                    Padding="15"
+                    Stroke="#CCCCCC"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10"
+                    BackgroundColor="#F9F9F9">
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Iniciar Sesión" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           TextColor="#1A1A1A" 
+                           HorizontalOptions="Center" />
+
+                    <!-- Entrada de Correo con x:Name obligatorio -->
+                    <Entry x:Name="txtCorreo"
+                           Placeholder="Correo Institucional"
+                           Keyboard="Email"
+                           TextColor="#000000"
+                           PlaceholderColor="#888888" />
+
+                    <!-- Entrada de Contraseña con x:Name obligatorio -->
+                    <Entry x:Name="txtPassword"
+                           Placeholder="Contraseña"
+                           IsPassword="True"
+                           TextColor="#000000"
+                           PlaceholderColor="#888888" />
+
+                    <Button Text="ENTRAR"
+                            BackgroundColor="#0066CC"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="8"
+                            HeightRequest="45"
+                            Clicked="IniciarSesion_Clicked" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Botones de Acción -->
+            <VerticalStackLayout Spacing="15" Padding="20,10">
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                    <Button
+                        Grid.Column="0"
+                        Text="POPULARES"
+                        BackgroundColor="#D32F2F"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="45"
+                        Clicked="OnPopularesClicked" />
+
+                    <Button
+                        Grid.Column="1"
+                        Text="NOVEDADES"
+                        BackgroundColor="#D32F2F"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="45"
+                        Clicked="OnNovedadesClicked" />
+                </Grid>
+
+                <Button
+                    Text="IR A VER"
+                    BackgroundColor="#D32F2F"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="8"
+                    HeightRequest="45"
+                    HorizontalOptions="Fill"
+                    Clicked="OnIrAVerClicked" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
