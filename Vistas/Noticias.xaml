@@ -3,18 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:modelos="clr-namespace:Menushell401.Modelos"
              x:Class="Menushell401.Vistas.Noticias"
-             Title="Noticias">
+             Title="Noticias"
+             BackgroundColor="#F2F2F2">
 
-    <CollectionView x:Name="listaNoticias" Margin="15">
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="modelos:Noticia">
-                <Frame Margin="0,5" Padding="12">
-                    <VerticalStackLayout Spacing="4">
-                        <Label Text="{Binding Titulo}" FontSize="18" FontAttributes="Bold" />
-                        <Label Text="{Binding Descripcion}" FontSize="14" />
-                    </VerticalStackLayout>
-                </Frame>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+    <RefreshView x:Name="refresh" Refreshing="OnRefresh" RefreshColor="#D32F2F">
+        <CollectionView x:Name="listaNoticias" Margin="16,12" SelectionMode="None">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="14" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center"
+                                     Spacing="8" Padding="30">
+                    <Label Text="📰" FontSize="48" HorizontalTextAlignment="Center" />
+                    <Label Text="No hay noticias por ahora"
+                           FontSize="16" TextColor="#757575"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="modelos:Noticia">
+                    <Border BackgroundColor="White"
+                            Stroke="Transparent"
+                            StrokeShape="RoundRectangle 14"
+                            Padding="0">
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Opacity="0.15" Radius="8" Offset="0,3" />
+                        </Border.Shadow>
+
+                        <Grid ColumnDefinitions="6,*">
+                            <BoxView Color="#D32F2F" />
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="0">
+                                <Image Source="{Binding Imagen}"
+                                       IsVisible="{Binding TieneImagen}"
+                                       HeightRequest="180"
+                                       Aspect="AspectFill" />
+
+                                <VerticalStackLayout Padding="16" Spacing="6">
+                                    <Label Text="{Binding Titulo}"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#212121" />
+                                    <Label Text="{Binding Descripcion}"
+                                           FontSize="14"
+                                           TextColor="#616161"
+                                           LineHeight="1.3"
+                                           MaxLines="4"
+                                           LineBreakMode="TailTruncation" />
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </RefreshView>
 </ContentPage>
