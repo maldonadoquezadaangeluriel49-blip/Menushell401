@@ -7,7 +7,11 @@
              BackgroundColor="#F2F2F2">
 
     <RefreshView x:Name="refresh" Refreshing="OnRefresh" RefreshColor="#D32F2F">
-        <CollectionView x:Name="listaNoticias" Margin="16,12" SelectionMode="None">
+        <CollectionView x:Name="listaNoticias"
+                        Margin="16,12"
+                        SelectionMode="None"
+                        MaximumWidthRequest="600"
+                        HorizontalOptions="Center">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="14" />
@@ -39,7 +43,7 @@
                             <VerticalStackLayout Grid.Column="1" Spacing="0">
                                 <Image Source="{Binding Imagen}"
                                        IsVisible="{Binding TieneImagen}"
-                                       HeightRequest="180"
+                                       HeightRequest="220"
                                        Aspect="AspectFill" />
 
                                 <VerticalStackLayout Padding="16" Spacing="6">

@@ -2,11 +2,54 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Menushell401.Vistas.Controlescolar"
-             Title="Controlescolar">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Control escolar"
+             BackgroundColor="#F2F2F2">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16,12" Spacing="14"
+                             MaximumWidthRequest="600" HorizontalOptions="Fill">
+
+            <Label Text="Registrar reporte o queja"
+                   FontSize="22" FontAttributes="Bold" TextColor="#212121" />
+            <Label Text="Llena los datos y envía tu reporte a control escolar."
+                   FontSize="14" TextColor="#757575" />
+
+            <Border BackgroundColor="White" Stroke="Transparent"
+                    StrokeShape="RoundRectangle 14" Padding="16">
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.15" Radius="8" Offset="0,3" />
+                </Border.Shadow>
+
+                <VerticalStackLayout Spacing="12">
+                    <Entry x:Name="txtNombre" Placeholder="Nombre completo" />
+                    <Entry x:Name="txtMatricula" Placeholder="Matrícula" />
+
+                    <Picker x:Name="pckTipo" Title="Tipo de reporte">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Queja</x:String>
+                                <x:String>Sugerencia</x:String>
+                                <x:String>Incidente</x:String>
+                                <x:String>Otro</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <Editor x:Name="txtDescripcion"
+                            Placeholder="Describe lo ocurrido..."
+                            HeightRequest="140"
+                            AutoSize="Disabled"
+                            MaxLength="1000" />
+
+                    <Button x:Name="btnEnviar"
+                            Text="Enviar reporte"
+                            BackgroundColor="#D32F2F"
+                            TextColor="White"
+                            CornerRadius="10"
+                            Clicked="OnEnviarClicked" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
