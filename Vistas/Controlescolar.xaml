@@ -1,29 +1,51 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Página de Control Escolar para el registro de reportes y quejas.
+    Utiliza el contenedor ContentPage de .NET MAUI con un color de fondo gris claro (#F2F2F2).
+-->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Menushell401.Vistas.Controlescolar"
              Title="Control escolar"
              BackgroundColor="#F2F2F2">
 
+    <!-- 
+        ScrollView: Permite el desplazamiento vertical de toda la vista 
+        para asegurar que el formulario sea accesible en pantallas pequeñas o al desplegar el teclado.
+    -->
     <ScrollView>
+        <!-- 
+            VerticalStackLayout: Alinea los elementos verticalmente con un ancho máximo de 600px 
+            para optimizar el diseño visual tanto en móviles como en dispositivos de pantalla más ancha.
+        -->
         <VerticalStackLayout Padding="16,12" Spacing="14"
                              MaximumWidthRequest="600" HorizontalOptions="Fill">
 
+            <!-- Título y subtítulo indicativos de la vista -->
             <Label Text="Registrar reporte o queja"
                    FontSize="22" FontAttributes="Bold" TextColor="#212121" />
             <Label Text="Llena los datos y envía tu reporte a control escolar."
                    FontSize="14" TextColor="#757575" />
 
+            <!-- 
+                Border: Tarjeta contenedora blanca con bordes redondeados y una sombra proyectada 
+                para dar un efecto de elevación (Material Design Card style).
+            -->
             <Border BackgroundColor="White" Stroke="Transparent"
                     StrokeShape="RoundRectangle 14" Padding="16">
                 <Border.Shadow>
                     <Shadow Brush="Black" Opacity="0.15" Radius="8" Offset="0,3" />
                 </Border.Shadow>
 
+                <!-- Campos de entrada agrupados en columna -->
                 <VerticalStackLayout Spacing="12">
+                    <!-- Entrada de texto para el nombre del estudiante -->
                     <Entry x:Name="txtNombre" Placeholder="Nombre completo" />
+
+                    <!-- Entrada de texto para la matrícula académica -->
                     <Entry x:Name="txtMatricula" Placeholder="Matrícula" />
 
+                    <!-- Selector desplegable (Picker) cargado con opciones estáticas definidas en un x:Array -->
                     <Picker x:Name="pckTipo" Title="Tipo de reporte">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
@@ -35,12 +57,14 @@
                         </Picker.ItemsSource>
                     </Picker>
 
+                    <!-- Campo de texto multilínea (Editor) para detallar la descripción con límite de 1000 caracteres -->
                     <Editor x:Name="txtDescripcion"
                             Placeholder="Describe lo ocurrido..."
                             HeightRequest="140"
                             AutoSize="Disabled"
                             MaxLength="1000" />
 
+                    <!-- Botón para procesar y enviar la información al backend (C#) mediante el evento Clicked -->
                     <Button x:Name="btnEnviar"
                             Text="Enviar reporte"
                             BackgroundColor="#D32F2F"

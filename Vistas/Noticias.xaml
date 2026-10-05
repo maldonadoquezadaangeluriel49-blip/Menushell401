@@ -1,69 +1,121 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Página de Noticias en .NET MAUI.
+    Se define el espacio de nombres 'modelos' para mapear los objetos Noticia en las plantillas.
+-->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:modelos="clr-namespace:Menushell401.Modelos"
              x:Class="Menushell401.Vistas.Noticias"
-             Title="Noticias"
-             BackgroundColor="#F2F2F2">
+             BackgroundColor="White">
 
-    <RefreshView x:Name="refresh" Refreshing="OnRefresh" RefreshColor="#D32F2F">
-        <CollectionView x:Name="listaNoticias"
-                        Margin="16,12"
-                        SelectionMode="None"
-                        MaximumWidthRequest="600"
-                        HorizontalOptions="Center">
+    <!-- 
+        Grid Principal: Utilizado como contenedor base para superponer 
+        la imagen de fondo debajo de todo el contenido de la interfaz.
+    -->
+    <Grid>
+        <!-- Imagen de fondo estática con opacidad reducida (30%) para dar textura sin perder legibilidad -->
+        <Image Source="bacground.jpg"
+               Aspect="AspectFill"
+               Opacity="0.30" />
 
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="14" />
-            </CollectionView.ItemsLayout>
+        <!-- 
+            RefreshView: Control nativo que habilita el gesto de "deslizar para actualizar" (Pull-to-Refresh).
+            Se vincula el evento 'Refreshing' al método 'OnRefresh' del code-behind C#.
+        -->
+        <RefreshView x:Name="refresh"
+                     Refreshing="OnRefresh"
+                     RefreshColor="#D32F2F"
+                     BackgroundColor="Transparent">
 
-            <CollectionView.EmptyView>
-                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center"
-                                     Spacing="8" Padding="30">
-                    <Label Text="📰" FontSize="48" HorizontalTextAlignment="Center" />
-                    <Label Text="No hay noticias por ahora"
-                           FontSize="16" TextColor="#757575"
+            <!-- Permite el desplazamiento vertical de la lista de elementos en pantallas pequeñas -->
+            <ScrollView BackgroundColor="Transparent">
+
+                <!-- Layout principal vertical centrado con un ancho máximo responsivo de 600px -->
+                <VerticalStackLayout Spacing="20" Padding="20"
+                                     MaximumWidthRequest="600"
+                                     HorizontalOptions="Center">
+
+                    <!-- Encabezados principales de la sección -->
+                    <Label Text="Sección de Noticias"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="#1A1A1A"
+                           HorizontalOptions="Center" />
+
+                    <Label Text="Explora las publicaciones y novedades del Diario UPVM"
+                           FontSize="16"
+                           TextColor="#444444"
                            HorizontalTextAlignment="Center" />
-                </VerticalStackLayout>
-            </CollectionView.EmptyView>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="modelos:Noticia">
-                    <Border BackgroundColor="White"
-                            Stroke="Transparent"
-                            StrokeShape="RoundRectangle 14"
-                            Padding="0">
-                        <Border.Shadow>
-                            <Shadow Brush="Black" Opacity="0.15" Radius="8" Offset="0,3" />
-                        </Border.Shadow>
+                    <!-- 
+                        LAYOUT DINÁMICO DE NOTICIAS (BindableLayout)
+                        Conecta la colección 'MisNoticias' del C# directamente con la interfaz para generar elementos repetidos.
+                    -->
+                    <VerticalStackLayout Spacing="14"
+                                         BindableLayout.ItemsSource="{Binding MisNoticias}">
 
-                        <Grid ColumnDefinitions="6,*">
-                            <BoxView Color="#D32F2F" />
-
-                            <VerticalStackLayout Grid.Column="1" Spacing="0">
-                                <Image Source="{Binding Imagen}"
-                                       IsVisible="{Binding TieneImagen}"
-                                       HeightRequest="220"
-                                       Aspect="AspectFill" />
-
-                                <VerticalStackLayout Padding="16" Spacing="6">
-                                    <Label Text="{Binding Titulo}"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           TextColor="#212121" />
-                                    <Label Text="{Binding Descripcion}"
-                                           FontSize="14"
-                                           TextColor="#616161"
-                                           LineHeight="1.3"
-                                           MaxLines="4"
-                                           LineBreakMode="TailTruncation" />
-                                </VerticalStackLayout>
+                        <!-- Vista de estado vacío: Se muestra automáticamente cuando la lista 'MisNoticias' no tiene elementos -->
+                        <BindableLayout.EmptyView>
+                            <VerticalStackLayout HorizontalOptions="Center" Spacing="8" Padding="30">
+                                <Label Text="📰" FontSize="48" HorizontalTextAlignment="Center" />
+                                <Label Text="No hay noticias por ahora"
+                                       FontSize="16" TextColor="#757575"
+                                       HorizontalTextAlignment="Center" />
                             </VerticalStackLayout>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                        </BindableLayout.EmptyView>
 
-        </CollectionView>
-    </RefreshView>
+                        <!-- Plantilla de diseño para renderizar cada noticia individual dentro de la lista -->
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="modelos:Noticia">
+
+                                <!-- Tarjeta contenedora de la noticia con bordes redondeados y sombra decorativa -->
+                                <Border BackgroundColor="White"
+                                        Stroke="Transparent"
+                                        StrokeShape="RoundRectangle 14"
+                                        Padding="0">
+                                    <Border.Shadow>
+                                        <Shadow Brush="Black" Opacity="0.15" Radius="8" Offset="0,3" />
+                                    </Border.Shadow>
+
+                                    <!-- Grid de 2 columnas: Columna 1 (barra lateral acentuada), Columna 2 (contenido de la noticia) -->
+                                    <Grid ColumnDefinitions="6,*">
+                                        <!-- Indicador visual lateral en color rojo de 6px de ancho -->
+                                        <BoxView Color="#D32F2F" />
+
+                                        <VerticalStackLayout Grid.Column="1" Spacing="0">
+
+                                            <!-- Imagen de la noticia: Se muestra condicionalmente solo si 'TieneImagen' es verdadero -->
+                                            <Image Source="{Binding Imagen}"
+                                                   IsVisible="{Binding TieneImagen}"
+                                                   HeightRequest="220"
+                                                   Aspect="AspectFill" />
+
+                                            <!-- Cuerpo textual de la tarjeta (Título y Descripción) -->
+                                            <VerticalStackLayout Padding="16" Spacing="6">
+                                                <Label Text="{Binding Titulo}"
+                                                       FontSize="18"
+                                                       FontAttributes="Bold"
+                                                       TextColor="#212121" />
+
+                                                <!-- Descripción truncada a un máximo de 4 líneas con puntos suspensivos (...) -->
+                                                <Label Text="{Binding Descripcion}"
+                                                       FontSize="14"
+                                                       TextColor="#616161"
+                                                       LineHeight="1.3"
+                                                       MaxLines="4"
+                                                       LineBreakMode="TailTruncation" />
+                                            </VerticalStackLayout>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </ScrollView>
+        </RefreshView>
+    </Grid>
 </ContentPage>

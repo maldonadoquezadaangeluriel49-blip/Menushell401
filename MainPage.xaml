@@ -1,20 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+    Definición de la página de contenido (ContentPage) en .NET MAUI.
+    Se establecen los espacios de nombres XML para MAUI y XAML, el espacio de nombres del proyecto y la clase C# vinculada.
+-->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Menushell401.MainPage"
              BackgroundColor="White">
 
+    <!-- 
+        ScrollView: Permite que todo el contenido sea desplazable verticalmente 
+        en pantallas de menor tamaño para evitar que los elementos se corten.
+    -->
     <ScrollView BackgroundColor="White">
+
+        <!-- 
+            VerticalStackLayout: Contenedor principal que organiza sus elementos hijos 
+            en una columna vertical de arriba hacia abajo con un espacio (Spacing) de 20px entre cada uno.
+        -->
         <VerticalStackLayout Spacing="20">
 
-            <!-- Banner / Encabezado de la UPVM -->
+            <!-- 
+                SECCIÓN 1: BANNER Y ENCABEZADO
+                Se utiliza un Grid para superponer la imagen del logo sobre la imagen de fondo (Banner).
+            -->
             <Grid HeightRequest="220">
+                <!-- Imagen de fondo que cubre todo el ancho y alto del contenedor Grid -->
                 <Image
                     Source="banner_upvm.jpg"
                     Aspect="AspectFill"
                     HorizontalOptions="Fill"
                     VerticalOptions="Fill" />
 
+                <!-- Logo superpuesto y centrado en la parte superior del Grid -->
                 <Image
                     Source="logoapp.jpg"
                     HeightRequest="150"
@@ -24,8 +42,12 @@
                     VerticalOptions="Center" />
             </Grid>
 
-            <!-- Textos Principales -->
+            <!-- 
+                SECCIÓN 2: TEXTOS PRINCIPALES DE BIENVENIDA
+                Agrupa el título y subtítulo con un espaciado reducido (10px) y márgenes laterales (Padding).
+            -->
             <VerticalStackLayout Spacing="10" Padding="20,0">
+                <!-- Título principal -->
                 <Label
                     Text="Diario UPVM"
                     TextColor="#1A1A1A"
@@ -33,6 +55,7 @@
                     FontAttributes="Bold"
                     HorizontalOptions="Center" />
 
+                <!-- Subtítulo / Descripción -->
                 <Label
                     Text="Bienvenido a nuestro lugar de noticias y chismotesss"
                     TextColor="#4A4A4A"
@@ -41,7 +64,10 @@
                     HorizontalTextAlignment="Center" />
             </VerticalStackLayout>
 
-            <!-- Formulario de Inicio de Sesión -->
+            <!-- 
+                SECCIÓN 3: FORMULARIO DE INICIO DE SESIÓN
+                Se utiliza un contenedor Border para enmarcar el formulario con bordes redondeados y un fondo claro.
+            -->
             <Border Margin="20,10"
                     Padding="15"
                     Stroke="#CCCCCC"
@@ -50,26 +76,28 @@
                     BackgroundColor="#F9F9F9">
 
                 <VerticalStackLayout Spacing="10">
+                    <!-- Encabezado de la tarjeta del formulario -->
                     <Label Text="Iniciar Sesión" 
                            FontSize="20" 
                            FontAttributes="Bold" 
                            TextColor="#1A1A1A" 
                            HorizontalOptions="Center" />
 
-                    <!-- Entrada de Correo con x:Name obligatorio -->
+                    <!-- Entrada de texto para el correo institucional (Acceso por C# mediante x:Name) -->
                     <Entry x:Name="txtCorreo"
                            Placeholder="Correo Institucional"
                            Keyboard="Email"
                            TextColor="#000000"
                            PlaceholderColor="#888888" />
 
-                    <!-- Entrada de Contraseña con x:Name obligatorio -->
+                    <!-- Entrada de texto para la contraseña con caracteres ocultos -->
                     <Entry x:Name="txtPassword"
                            Placeholder="Contraseña"
                            IsPassword="True"
                            TextColor="#000000"
                            PlaceholderColor="#888888" />
 
+                    <!-- Botón de envío que invoca el evento IniciarSesion_Clicked en el code-behind (C#) -->
                     <Button Text="ENTRAR"
                             BackgroundColor="#0066CC"
                             TextColor="White"
@@ -80,8 +108,12 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Botones de Acción -->
+            <!-- 
+                SECCIÓN 4: BOTONES DE NAVEGACIÓN Y ACCIÓN
+                Organización de opciones secundarias mediante combinación de Grid y StackLayout.
+            -->
             <VerticalStackLayout Spacing="15" Padding="20,10">
+                <!-- Grid de dos columnas iguales para distribuir los botones "Populares" y "Novedades" lado a lado -->
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
                     <Button
                         Grid.Column="0"
@@ -104,6 +136,7 @@
                         Clicked="OnNovedadesClicked" />
                 </Grid>
 
+                <!-- Botón de ancho completo para la acción "IR A VER" -->
                 <Button
                     Text="IR A VER"
                     BackgroundColor="#D32F2F"
