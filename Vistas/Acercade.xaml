@@ -1,12 +1,109 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:modelos="clr-namespace:Menushell401.Modelos"
              x:Class="Menushell401.Vistas.Acercade"
-             Title="Acercade">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             BackgroundColor="#F7F7F7">
+
+    <RefreshView x:Name="refresh"
+                 Refreshing="OnRefresh"
+                 RefreshColor="#D32F2F">
+
+        <ScrollView>
+            <VerticalStackLayout Spacing="18" Padding="20"
+                                 MaximumWidthRequest="600"
+                                 HorizontalOptions="Center">
+
+                <!-- Encabezado -->
+                <Border StrokeShape="RoundRectangle 20"
+                        Stroke="Transparent"
+                        Padding="24">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#D32F2F" Offset="0.0" />
+                            <GradientStop Color="#8E1B1B" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <Border WidthRequest="90" HeightRequest="90"
+                                StrokeShape="RoundRectangle 45"
+                                Stroke="White" StrokeThickness="3"
+                                BackgroundColor="White">
+                            <Image Source="logoapp.jpg" Aspect="AspectFill" />
+                        </Border>
+
+                        <Label Text="Acerca de"
+                               FontSize="26"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               HorizontalOptions="Center" />
+
+                        <Label Text="Diario UPVM"
+                               FontSize="16"
+                               TextColor="#FFD9D9"
+                               HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Tarjetas desde la base de datos -->
+                <VerticalStackLayout Spacing="12"
+                                     BindableLayout.ItemsSource="{Binding Items}">
+
+                    <BindableLayout.EmptyView>
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="8" Padding="30">
+                            <Label Text="ℹ️" FontSize="48" HorizontalTextAlignment="Center" />
+                            <Label Text="No hay información disponible"
+                                   FontSize="16" TextColor="#757575"
+                                   HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </BindableLayout.EmptyView>
+
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="modelos:AcercaItem">
+                            <Border BackgroundColor="White"
+                                    Stroke="#EEEEEE"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 16"
+                                    Padding="16">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" Opacity="0.08" Radius="6" Offset="0,2" />
+                                </Border.Shadow>
+
+                                <Grid ColumnDefinitions="56,*" ColumnSpacing="14">
+                                    <Border WidthRequest="52" HeightRequest="52"
+                                            StrokeShape="RoundRectangle 26"
+                                            Stroke="Transparent"
+                                            BackgroundColor="#FDECEA"
+                                            VerticalOptions="Start">
+                                        <Label Text="{Binding Icono}"
+                                               FontSize="24"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center" />
+                                    </Border>
+
+                                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                        <Label Text="{Binding Titulo}"
+                                               FontSize="17"
+                                               FontAttributes="Bold"
+                                               TextColor="#212121" />
+                                        <Label Text="{Binding Contenido}"
+                                               FontSize="14"
+                                               TextColor="#616161"
+                                               LineHeight="1.3" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <Label Text="Versión 1.0 · UPVM"
+                       FontSize="12"
+                       TextColor="#9E9E9E"
+                       HorizontalOptions="Center" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
 </ContentPage>

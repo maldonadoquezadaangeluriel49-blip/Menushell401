@@ -25,11 +25,11 @@
         <ShellContent ContentTemplate="{DataTemplate vistas:Controlescolar}" Route="Controlescolar" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Historial" Icon="batman.png">
+    <FlyoutItem Title="directorio" Icon="batman.png">
         <ShellContent ContentTemplate="{DataTemplate vistas:Historial}" Route="Historial" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Eventos" Icon="eventos.png">
+    <FlyoutItem Title="becas" Icon="eventos.png">
         <ShellContent ContentTemplate="{DataTemplate vistas:Eventos}" Route="Eventos" />
     </FlyoutItem>
 
@@ -37,7 +37,7 @@
         <ShellContent ContentTemplate="{DataTemplate vistas:Comunicados}" Route="Comunicados" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Carga Actual" Icon="cargaescolar.png">
+    <FlyoutItem Title="mapa de campus" Icon="cargaescolar.png">
         <ShellContent ContentTemplate="{DataTemplate vistas:CargaActual}" Route="CargaActual" />
     </FlyoutItem>
 
