@@ -25,8 +25,8 @@
         <ShellContent ContentTemplate="{DataTemplate vistas:Controlescolar}" Route="Controlescolar" />
     </FlyoutItem>
 
-    <FlyoutItem Title="directorio" Icon="batman.png">
-        <ShellContent ContentTemplate="{DataTemplate vistas:Historial}" Route="Historial" />
+    <FlyoutItem Title="Directorio" Icon="batman.png">
+        <ShellContent ContentTemplate="{DataTemplate vistas:Directorio}" Route="Directorio" />
     </FlyoutItem>
 
     <FlyoutItem Title="becas" Icon="eventos.png">

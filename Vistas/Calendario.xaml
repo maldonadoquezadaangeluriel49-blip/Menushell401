@@ -3,10 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Menushell401.Vistas.Calendario"
              Title="Calendario">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid RowDefinitions="Auto,Auto,*" Padding="15" RowSpacing="10">
+
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+            <DatePicker x:Name="dpk_fecha" Format="dd MMMM yyyy" TextColor="#E53935"
+                        DateSelected="dpk_fecha_DateSelected" />
+            <Button Grid.Column="1" x:Name="btnMes" Text="Ver todo el mes"
+                    BackgroundColor="#E53935" TextColor="White" Clicked="btnMes_Clicked" />
+        </Grid>
+
+        <ActivityIndicator Grid.Row="1" x:Name="indicador" IsVisible="False"
+                           IsRunning="False" Color="#E53935" />
+
+        <Grid Grid.Row="2">
+            <ListView x:Name="lstEventos" HasUnevenRows="True" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <VerticalStackLayout Padding="10" Spacing="4">
+                                <Label Text="{Binding titulo}" FontAttributes="Bold" FontSize="Medium" TextColor="#E53935" />
+                                <Label Text="{Binding fecha}" FontSize="Small" TextColor="Gray" />
+                                <Label Text="{Binding contenido}" TextType="Html" />
+                            </VerticalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label x:Name="lblVacio" Text="No hay eventos para esta fecha." IsVisible="False"
+                   HorizontalOptions="Center" VerticalOptions="Start" TextColor="Gray" />
+        </Grid>
+    </Grid>
 </ContentPage>

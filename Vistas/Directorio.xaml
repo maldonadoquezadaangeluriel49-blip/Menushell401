@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Menushell401.Vistas.Directorio"
+             Title="Directorio">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="15" RowSpacing="10">
+
+        <Picker Grid.Row="0" x:Name="pkrDepartamento" Title="Seleccione departamento"
+                TextColor="#E53935" SelectedIndexChanged="pkrDepartamento_SelectedIndexChanged" />
+
+        <ActivityIndicator Grid.Row="1" x:Name="indicador" IsVisible="False"
+                           IsRunning="False" Color="#E53935" />
+
+        <Grid Grid.Row="2">
+            <ListView x:Name="lstDirectorio" HasUnevenRows="True" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <VerticalStackLayout Padding="10" Spacing="3">
+                                <Label Text="{Binding nombre}" FontAttributes="Bold" FontSize="Medium" TextColor="#E53935" />
+                                <Label Text="{Binding departamento}" FontSize="Small" TextColor="Gray" />
+                                <Label Text="{Binding correo, StringFormat='Correo: {0}'}" />
+                                <Label Text="{Binding extension, StringFormat='Extensión: {0}'}" />
+                            </VerticalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label x:Name="lblVacio" Text="No hay contactos en este departamento." IsVisible="False"
+                   HorizontalOptions="Center" VerticalOptions="Start" TextColor="Gray" />
+        </Grid>
+    </Grid>
+</ContentPage>
