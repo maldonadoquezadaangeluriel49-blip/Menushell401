@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:modelos="clr-namespace:Menushell401.Modelos"
+             x:Class="Menushell401.Vistas.NoticiaDetalle"
+             x:DataType="modelos:Noticia"
+             Title="Noticia"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout MaximumWidthRequest="900" HorizontalOptions="Center" Spacing="0">
+
+            <Image Source="{Binding Imagen}"
+                   IsVisible="{Binding TieneImagen}"
+                   HeightRequest="360"
+                   Aspect="AspectFill" />
+
+            <VerticalStackLayout Padding="24" Spacing="14">
+                <Label Text="{Binding Titulo}"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                       TextColor="#1A1A1A" />
+
+                <BoxView HeightRequest="3" WidthRequest="70" Color="#D32F2F"
+                         HorizontalOptions="Start" />
+
+                <Label Text="{Binding Descripcion}"
+                       FontSize="18"
+                       LineHeight="1.45"
+                       TextColor="#333333" />
+
+                <Button Text="Volver a noticias"
+                        BackgroundColor="#D32F2F"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Margin="0,20,0,0"
+                        Clicked="btnVolver_Clicked" />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

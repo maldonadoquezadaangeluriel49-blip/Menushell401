@@ -69,11 +69,15 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="Plugin.LocalNotification" Version="14.1.2" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Update="Vistas\Directorio.xaml.cs">
 	    <DependentUpon>Directorio.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Vistas\NoticiaDetalle.xaml.cs">
+	    <DependentUpon>NoticiaDetalle.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -100,6 +104,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Vistas\Directorio.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Vistas\NoticiaDetalle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Vistas\Noticias.xaml">

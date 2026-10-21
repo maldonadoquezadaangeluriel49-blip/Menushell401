@@ -5,6 +5,8 @@
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(Vistas.NoticiaDetalle), typeof(Vistas.NoticiaDetalle));
+            Notificaciones.Iniciar();
         }
     }
 }
