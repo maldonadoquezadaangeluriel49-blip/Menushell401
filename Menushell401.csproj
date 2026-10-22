@@ -85,6 +85,9 @@
 	  <MauiXaml Update="Vistas\Acercade.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Vistas\Becas.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Vistas\Calendario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

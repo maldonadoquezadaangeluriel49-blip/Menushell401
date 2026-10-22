@@ -30,7 +30,7 @@
     </FlyoutItem>
 
     <FlyoutItem Title="becas" Icon="eventos.png">
-        <ShellContent ContentTemplate="{DataTemplate vistas:Eventos}" Route="Eventos" />
+        <ShellContent ContentTemplate="{DataTemplate vistas:Becas}" Route="Eventos" />
     </FlyoutItem>
 
     <FlyoutItem Title="Comunicados" Icon="comunicados.png">

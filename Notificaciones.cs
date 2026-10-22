@@ -73,4 +73,47 @@ public static class Notificaciones
 
         await Mostrar(2000 + idEvento, "Evento mañana", titulo, "calendario", aviso);
     }
+
+    // 6) Becas: programa el aviso 3 días antes de que cierre, a las 9:00 a. m.
+    public static async Task ActivarAvisoBeca(Beca b, int diasAntes = 3)
+    {
+        DateTime fechaLimite = DateTime.Today.AddDays(b.DiasRestantes);
+        DateTime aviso = fechaLimite.AddDays(-diasAntes).AddHours(9);
+
+        // Si ya estamos dentro de esos 3 días, avisamos casi de inmediato
+        if (aviso <= DateTime.Now) aviso = DateTime.Now.AddSeconds(5);
+
+        await Mostrar(3000 + b.Id, "Beca por cerrar",
+                      $"{b.Nombre} cierra el {b.FechaLimite}", "becas", aviso);
+    }
+
+    // 7) Becas: cancela el aviso programado
+    public static void CancelarAvisoBeca(Beca b)
+    {
+        LocalNotificationCenter.Current.Cancel(3000 + b.Id);
+    }
+
+    // 8) Becas: avisa si hay becas nuevas
+    public static async Task ProcesarNuevasBecas(IEnumerable<Beca> becas)
+    {
+        var lista = becas.ToList();
+        if (lista.Count == 0) return;
+
+        int maxId = lista.Max(b => b.Id);
+        int ultimo = Preferences.Get("ultimo_id_beca", -1);
+
+        if (ultimo == -1)
+        {
+            Preferences.Set("ultimo_id_beca", maxId);
+            return;
+        }
+
+        var nuevas = lista.Where(b => b.Id > ultimo).OrderByDescending(b => b.Id).ToList();
+        if (nuevas.Count == 0) return;
+
+        Preferences.Set("ultimo_id_beca", maxId);
+
+        string titulo = nuevas.Count == 1 ? "Nueva beca disponible" : $"{nuevas.Count} becas nuevas";
+        await Mostrar(1002, titulo, nuevas[0].Nombre, "becas");
+    }
 }

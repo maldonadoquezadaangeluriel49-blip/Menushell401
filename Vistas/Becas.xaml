@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:modelos="clr-namespace:Menushell401.Modelos"
+             x:Class="Menushell401.Vistas.Becas"
+             Title="Becas"
+             BackgroundColor="White">
+
+    <RefreshView x:Name="refresh" Refreshing="OnRefresh" RefreshColor="#D32F2F">
+        <ScrollView>
+            <VerticalStackLayout Spacing="16" Padding="20"
+                                 MaximumWidthRequest="900" HorizontalOptions="Center">
+
+                <Label Text="Becas y convocatorias" FontSize="28" FontAttributes="Bold"
+                       TextColor="#1A1A1A" HorizontalOptions="Center" />
+                <Label Text="Activa el 🔔 y te avisamos antes de que cierre la convocatoria"
+                       FontSize="15" TextColor="#555555" HorizontalTextAlignment="Center" />
+
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                    <Picker x:Name="pkTipo" Title="Tipo de beca"
+                            SelectedIndexChanged="OnFiltroChanged">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Todas</x:String>
+                                <x:String>Académica</x:String>
+                                <x:String>Deportiva</x:String>
+                                <x:String>Cultural</x:String>
+                                <x:String>Económica</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <HorizontalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                        <Label Text="Solo vigentes" VerticalOptions="Center" />
+                        <Switch x:Name="swVigentes" IsToggled="True" Toggled="OnVigentesToggled"
+                                OnColor="#D32F2F" />
+                    </HorizontalStackLayout>
+                </Grid>
+
+                <VerticalStackLayout Spacing="16" BindableLayout.ItemsSource="{Binding MisBecas}">
+
+                    <BindableLayout.EmptyView>
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="8" Padding="30">
+                            <Label Text="🎓" FontSize="48" HorizontalTextAlignment="Center" />
+                            <Label Text="No hay becas con ese filtro"
+                                   FontSize="16" TextColor="#757575"
+                                   HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </BindableLayout.EmptyView>
+
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="modelos:Beca">
+                            <Border BackgroundColor="White" Stroke="Transparent"
+                                    StrokeShape="RoundRectangle 16" Padding="0">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" Opacity="0.15" Radius="8" Offset="0,3" />
+                                </Border.Shadow>
+
+                                <Grid ColumnDefinitions="8,*">
+                                    <BoxView Color="{Binding ColorPlazo}" />
+
+                                    <VerticalStackLayout Grid.Column="1" Padding="18" Spacing="6">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <Label Text="{Binding Nombre}" FontSize="20"
+                                                   FontAttributes="Bold" TextColor="#212121" />
+                                            <Label Grid.Column="1" Text="{Binding Tipo}" FontSize="12"
+                                                   TextColor="#D32F2F" VerticalOptions="Center" />
+                                        </Grid>
+
+                                        <Label Text="{Binding TextoPlazo}" FontSize="16"
+                                               FontAttributes="Bold" TextColor="{Binding ColorPlazo}" />
+                                        <Label Text="{Binding FechaLimite, StringFormat='Fecha límite: {0}'}"
+                                               FontSize="13" TextColor="#757575" />
+                                        <Label Text="{Binding Monto}" FontSize="15" FontAttributes="Bold"
+                                               TextColor="#2E7D32" />
+                                        <Label Text="{Binding Descripcion}" FontSize="15" TextColor="#424242" />
+                                        <Label Text="{Binding Requisitos, StringFormat='Requisitos: {0}'}"
+                                               FontSize="13" TextColor="#616161" />
+
+                                        <Button Text="{Binding TextoBoton}"
+                                                BackgroundColor="{Binding ColorBoton}"
+                                                TextColor="White" CornerRadius="10" Margin="0,8,0,0"
+                                                Clicked="OnRecordatorioClicked" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+</ContentPage>
