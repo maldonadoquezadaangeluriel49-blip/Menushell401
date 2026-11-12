@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:modelos="clr-namespace:Menushell401.Modelos"
+             x:Class="Menushell401.Vistas.Asistente"
+             Title="Asistente UPVM"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="*, Auto" Padding="10">
+
+        <!-- Lista de mensajes -->
+        <CollectionView x:Name="ChatMessagesList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="modelos:ChatMessage">
+                    <Border Margin="5"
+                            Padding="12"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 15"
+                            HorizontalOptions="{Binding HorizontalAlignment}"
+                            BackgroundColor="{Binding BackgroundColor}">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding SenderName}"
+                                   FontSize="10"
+                                   TextColor="#E0E0E0"
+                                   FontAttributes="Bold" />
+                            <Label Text="{Binding Content}"
+                                   TextColor="White"
+                                   LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Barra para escribir -->
+        <Border Grid.Row="1"
+                Padding="5"
+                Margin="0,10,0,0"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 25"
+                BackgroundColor="#F0F0F0">
+            <Grid ColumnDefinitions="*, Auto">
+                <Editor x:Name="MessageEntry"
+                        Placeholder="Pregunta sobre becas, noticias o eventos..."
+                        AutoSize="TextChanges"
+                        VerticalOptions="Center"
+                        Margin="10,0"
+                        TextColor="Black" />
+
+                <Button Grid.Column="1"
+                        x:Name="SendBtn"
+                        Text="➤"
+                        Clicked="SendBtn_Clicked"
+                        BackgroundColor="#D32F2F"
+                        TextColor="White"
+                        CornerRadius="22"
+                        WidthRequest="45"
+                        HeightRequest="45"
+                        Padding="0"
+                        VerticalOptions="Center"
+                        Margin="0,0,5,0" />
+            </Grid>
+        </Border>
+
+    </Grid>
+</ContentPage>

@@ -37,16 +37,18 @@
         <ShellContent ContentTemplate="{DataTemplate vistas:Comunicados}" Route="Comunicados" />
     </FlyoutItem>
 
-    <FlyoutItem Title="mapa de campus" Icon="cargaescolar.png">
-        <ShellContent ContentTemplate="{DataTemplate vistas:CargaActual}" Route="CargaActual" />
-    </FlyoutItem>
+    <ShellContent Title="Croquis"
+              ContentTemplate="{DataTemplate vistas:Croquis}"
+              Route="croquis" />
 
     <FlyoutItem Title="Calendario" Icon="calendario2.png">
-        <ShellContent ContentTemplate="{DataTemplate vistas:Calendario}" Route="Calendario" />
+        <ShellContent ContentTemplate="{DataTemplate vistas:Calendario}" Route="croquis" />
     </FlyoutItem>
 
     <FlyoutItem Title="Acerca de" Icon="acercade.png">
         <ShellContent ContentTemplate="{DataTemplate vistas:Acercade}" Route="Acercade" />
     </FlyoutItem>
-
+    <ShellContent Title="Asistente"
+              ContentTemplate="{DataTemplate vistas:Asistente}"
+              Route="asistente" />
 </Shell>
